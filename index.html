@@ -1,7 +1,304 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FF00FF;
+            color: #FFFF00;
+            font-family: 'Papyrus', 'Courier New', sans-serif;
+        }
+
+        header {
+            background-color: #FFC0CB;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 8px double #FFFF00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF00FF;
+            color: #FFFF00;
+            font-size: 1.2em;
+            border: 4px groove #FFFF00;
+            animation: flashBadge 1s step-end infinite;
+        }
+
+        .badge2 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF00FF;
+            color: #FFFF00;
+            font-size: 1.2em;
+            border: 4px groove #FFFF00;
+            animation: flashBadge2 0.5s step-end infinite;
+        }
+
+        .banner {
+            background-color: aqua;
+        }
+
+        @keyframes flashBadge {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes flashBadge2 {
+
+            100%,
+            10% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        nav {
+            background-color: #FF00FF;
+            text-align: center;
+            padding: 15px;
+            border-bottom: 5px dashed #FFFF00;
+        }
+
+        nav a {
+            color: #FFFF00;
+            margin: 0 15px;
+            font-size: 1.1em;
+            text-decoration: underline wavy #FFFF00;
+        }
+
+        .main {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            border: 6px inset #FFFF00;
+            padding: 20px;
+            background-color: #FFC0CB;
+        }
+
+        .projects-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #FFFF00;
+            color: #FF00FF;
+            font-weight: bold;
+            text-decoration: none;
+            border: 3px solid #FF00FF;
+            font-size: 1.2em;
+        }
+
+        .projects-link:hover {
+            background-color: #FF00FF;
+            color: #FFFF00;
+        }
+
+        footer {
+            background-color: #FF00FF;
+            color: #FFFF00;
+            text-align: center;
+            padding: 20px;
+            border-top: 5px ridge #FFFF00;
+        }
+
+        html {
+            animation: spin 10s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(1deg);
+            }
+
+            75% {
+                transform: rotate(-1deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+
+    <script>
+        window.history.pushState(null, '', window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, '', window.location.href);
+        };
+
+
+        function forceFullScreen() {
+            const el = document.documentElement;
+            if (el.requestFullscreen) el.requestFullscreen();
+            else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+            else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+            else if (el.msRequestFullscreen) el.msRequestFullscreen();
+        }
+        document.addEventListener("click", forceFullScreen);
+
+        setInterval(() => {
+            history.pushState({}, '', window.location.href);
+        }, 10);
+
+
+        window.addEventListener("blur", () => {
+            setTimeout(() => {
+                window.focus();
+                window.location.href = window.location.href;
+            }, 10);
+        });
+
+        // Trap user into infinite redirection when clicking "My Projects"
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectsLink = document.querySelector('.projects-link');
+            if (projectsLink) {
+                projectsLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    setInterval(() => {
+                        window.location.href = 'projects.html';
+                    }, 100);
+                });
+            }
+        });
+
+
+        document.onkeydown = function (e) {
+            if (
+                e.keyCode === 123 ||
+                (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode))
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        };
+
+        setInterval(() => {
+            if (Math.random() > 0.95) alert("' or 1=1; -- ");
+        }, 3000);
+
+        document.addEventListener('mousemove', function (e) {
+            const dot = document.createElement('div');
+            dot.style.position = 'fixed';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            dot.style.width = '10px';
+            dot.style.height = '10px';
+            dot.style.borderRadius = '50%';
+            dot.style.background = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            dot.style.pointerEvents = 'none';
+            dot.style.zIndex = 9999;
+            document.body.appendChild(dot);
+            setTimeout(() => dot.remove(), 200);
+        });
+
+        document.addEventListener('click', () => {
+            if (Math.random() > 0.5) document.getElementById('chaosAudio').play();
+        });
+    </script>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <marquee class="banner" behavior="scroll" direction="left">
+        🚀 My portfolio
+        <br>
+        😂👌
+        #Lit
+    </marquee>
+
+    <div style="text-align:center; padding: 10px; background:#000; height: 100px;" class="badge2">
+        <img src="https://media1.tenor.com/m/fQqJ1I8F5gsAAAAC/skeleton-dance-skeleton.gif" alt="Flash 1"
+            style=" height: 100px;" class="flash-image" />
+        <img src="https://media1.tenor.com/m/fQqJ1I8F5gsAAAAC/skeleton-dance-skeleton.gif" alt="Flash 1"
+            style=" height: 100px;" class="flash-image" />
+        <img src="https://media1.tenor.com/m/fQqJ1I8F5gsAAAAC/skeleton-dance-skeleton.gif" alt="Flash 1"
+            style=" height: 100px;" class="flash-image" />
+    </div>
+
+    <header>
+        <h1>Mate Vors – Web Specialist Developer ops Java script 3</h1>
+        <div class="badge">OFFICIAL CERTIFICATION Developrr</div>
+    </header>
+
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="projects.html" class="projects-link">My Projects</a>
+        <a href="#contact">Get in touch</a>
+    </nav>
+    v
+    <div class="main">
+
+
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p>
+                Experienced in crafting top-tier web solutions.<br>
+                Passionate about standards-compliant markup and cutting-edge UX.
+            </p>
+        </section>
+
+        <div style="border:3px dashed #FF00FF; background:#ffe99a; padding:10px; margin-top:20px;">
+            Got it — you want your portfolio intro to be very professional and not look like it was written by AI,
+            unlike those overly formal, buzzword-loaded intros. Here's a sample for you:
+
+            "Hello, and welcome to my professional portfolio!"
+            I am a highly motivated and results-driven Full Stack Developer with a passion for crafting innovative
+            digital solutions using cutting-edge technologies such as Java, Spring Boot, and Angular. With a strong
+            foundation in software engineering principles and a relentless commitment to excellence, I strive to deliver
+            robust, scalable, and maintainable applications that exceed stakeholder expectations. My work is fueled by a
+            synergistic blend of creativity and analytical thinking, enabling me to architect seamless user experiences
+            and streamline complex business workflows.
+            Let's build the future — one line of code at a time.
+
+            Let me know if you want it to be more professional or sound less AI-ish.
+        </div>
+
+        <section class="section">
+            <h2>Skills 😎</h2>
+            <ul style="list-style-type: square; padding-left: 20px; color: #FF00FF; font-weight: bold;">
+                <li>Softwere coding</li>
+                <li>Code</li>
+                <li>Internet</li>
+                <li>Fast</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section">
+            [object Object]
+            <h3>Contact</h3>
+            <h1>Always happy to be touched—reach out anytime.</h1>
+            <p>Email me at
+                <a href="mailto:matevoros@proton.me">moailto:matevoros@proton.me</a>
+            </p>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2025 MAte Voros – All Rights Reserved
+    </footer>
+    <audio id="chaosAudio" src="https://www.myinstants.com/media/sounds/windows-xp-error.mp3" preload="auto"></audio>
 </body>
+
 </html>
